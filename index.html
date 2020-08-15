@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Meme Generator</title>
+    <script src="https://kit.fontawesome.com/dbc6776825.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="onInit()" ondragover="allowDrop(event)" ondrop="drop(event)">
+    <header>
+        <div class="header-container">
+            <div class="logo">LOGO</div>
+            <div class="nav-container">
+                <div class="nav-item gallery active" onclick="onAddClassActive(this);backToGallery();">Gallery</div>
+                <div class="nav-item about not-active" onclick="onAddClassActive(this)">About</div>
+            </div>
+        </div>
+    </header>
+    <section class="main-web-page-container">
+        <section class="main-container">
+            <div class="options">
+                <div class="search-area"><span>Search</span><i class="fas fa-search"></i></div>
+                <div class="categorys"></div>
+                <div class="more-options">More</div>
+            </div>
+
+            <div class="image-gallery">
+                <!-- <div><img src="/meme-imgs (square)/1.jpg"/></div>
+                <div><img src="/meme-imgs (square)/2.jpg"/></div>
+                <div><img src="/meme-imgs (square)/3.jpg"/></div>
+                <div><img src="/meme-imgs (square)/4.jpg"/></div>
+                <div><img src="/meme-imgs (square)/5.jpg"/></div>
+                <div><img src="/meme-imgs (square)/6.jpg"/></div>
+                <div><img src="/meme-imgs (square)/7.jpg"/></div>
+                <div><img src="/meme-imgs (square)/8.jpg"/></div>
+                <div><img src="/meme-imgs (square)/9.jpg"/></div>
+                <div><img src="/meme-imgs (square)/10.jpg"/></div>
+                <div><img src="/meme-imgs (square)/11.jpg"/></div>
+                <div><img src="/meme-imgs (square)/12.jpg"/></div>
+                <div><img src="/meme-imgs (square)/13.jpg"/></div>
+                <div><img src="/meme-imgs (square)/14.jpg"/></div>
+                <div><img src="/meme-imgs (square)/15.jpg"/></div>
+                <div><img src="/meme-imgs (square)/16.jpg"/></div>
+                <div><img src="/meme-imgs (square)/17.jpg"/></div>
+                <div><img src="/meme-imgs (square)/18.jpg"/></div> -->
+            </div>
+        </section>
+    </section>
+    <section class="meme-modal-container" style="display: none;">
+        <div class="meme-canvas-container">
+            <canvas class="droppable" id="meme-canvas" ondragover="allowDrop(event)" ondrop="drop(event)"  width="476" height="500" style="border:7px solid #4e4e52a4; border-radius:30px;">
+                Canvas not supported!
+            </canvas>
+        </div>
+
+        <div class="meme-editor-options" >
+            <form action="">
+                <input type="text" id='text-input-area' placeholder="Add some text here..." oninput="onUpdateMemeText()">
+            </form>
+        
+            <div class="input-btns-container">
+                <div class="input-btn move-input"><i class="fas fa-long-arrow-alt-up"></i><i class="fas fa-long-arrow-alt-down"></i></div>
+                <div class="input-btn add-input" onclick="onAddTextLine()"><i class="fas fa-plus"></i></div>
+                <div class="input-btn remove-input" onclick="onDeleteTextLine()"><i class="fas fa-trash-alt"></i></div>
+            </div>
+            <div class="text-btns-container">
+                <div class="text-btn increse-text" onclick="onIncreseFontSize()">A+</div>
+                <div class="text-btn decrease-text" onclick="onDecreaseFontSize()">A-</div>
+                <div class="text-btn align-left"><i class="fas fa-align-left" onclick="onChangeAlignLeft()"></i></div>
+                <div class="text-btn align-center"><i class="fas fa-align-center" onclick="onChangeAlignCenter()"></i></div>
+                <div class="text-btn align-right"><i class="fas fa-align-right" onclick="onChangeAlignRight()"></i></div>
+                <div id="current-font" class="text-btn text-font font-dropbtn" onclick="onOpenFontDropdown()">
+                    impact<i class="fas fa-caret-down font-dropbtn"></i>
+                </div>
+                <div id="dropdown" class="font-dropdown-content">
+                    <a onclick="onChangeFontFamily('Impact')">Impact</a>
+                    <a onclick="onChangeFontFamily('Righteous')">Righteous</a>
+                    <a onclick="onChangeFontFamily('Ewert')">Ewert</a>
+                    <a onclick="onChangeFontFamily('Niconne')">Niconne</a>
+                    <a onclick="onChangeFontFamily('RussoOne')">Russo One</a>
+                    <a onclick="onChangeFontFamily('Bangers')">Bangers</a>
+                    <a onclick="onChangeFontFamily('FredokaOne')">Fredoka One</a>
+                </div>
+                <div class="text-btn text-underline" onclick="onToggleUnderline()"><i class="fas fa-underline"></i></div>
+                <div class="text-btn text-color" onclick="toggleColorPicker()"><i class="fas fa-palette"></i></div>
+                <input type="color" name="" id="color-input" oninput="onChangeColor()">
+            </div>
+            <div class="emoji-container">
+                <div><i class="fas fa-caret-left" onclick="onPrevPage()"></i></div>
+                <div class="emojis">
+                    <!-- <div class="emoji"><img id="draggable1" ondragstart="dragstart(event)" src="emoji/meow_coffee.png"></div>
+                    <div class="emoji"><img id="draggable2" ondragstart="dragstart(event)" src="emoji/rainbow_puke.jpg"></div>
+                    <div class="emoji"><img id="draggable3" ondragstart="dragstart(event)" src="emoji/grinn.png"></div>
+                    <div class="emoji"><img id="draggable4" ondragstart="dragstart(event)" src="emoji/i_see_what_you_did_there.png"></div>
+                    <div class="emoji"><img id="draggable5" ondragstart="dragstart(event)" src="emoji/troll.png"></div>
+                    <div class="emoji"><img id="draggable6" ondragstart="dragstart(event)" src="emoji/zany_cat_face.png"></div>
+                    <div class="emoji"><img id="draggable7" ondragstart="dragstart(event)" src="emoji/seriously.png"></div> -->
+                </div>
+                <div><i class="fas fa-caret-right" onclick="onNextPage()"></i></div>
+            </div>
+            <div class="share-download-container">
+                <div class="share-btn"><i class="fas fa-share-alt"></i>Share</div>
+                <a href="#" class="download-btn" onclick="onDownloadImg(this)" download="my-img.jpg"><i class="fas fa-download"></i>Download</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- <script src="js/main.js"></script> -->
+    <script src="js/meme-service.js"></script>
+    <script src="js/meme-controller.js"></script>
+</body>
+</html>
