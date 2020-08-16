@@ -20,10 +20,24 @@ function backToGallery(){
     document.querySelector('.main-web-page-container').style.display = 'block';
 }
 
+function onSelectEmoji(emojiIdx){
+    console.log('emojiIdx',emojiIdx)
+    selectEmoji(emojiIdx);
+}
 // the image is taken from gMeme
 function changeMemeOnCanvas(id){
     var img = new Image()
     img.src = `meme-imgs/${id}.jpg`
+    var ctx = getCanvasObject();
+    ctx.drawImage(img, 0, 0);
+    drawAllLines();
+    // draw(); //** */
+}
+
+function addEmojiToCanvas(emojiUrl){
+    console.log('emojiUrl',emojiUrl)
+    var img = new Image()
+    img.src = `${emojiUrl}`
     var ctx = getCanvasObject();
     ctx.drawImage(img, 0, 0);
     drawAllLines();
@@ -196,16 +210,16 @@ function renderEmoji(){
     var emojis = getEmojisForDisplay();
     emojis.forEach(function(emoji){
         strHTML += `
-        <div class="emoji"><img id="draggable${emoji.id}" ondragstart="dragstart(event)" onclick="pickImage(${emoji.url})" src="${emoji.url}"></div>
+        <div class="emoji"><img id="draggable${emoji.id}" ondragstart="dragstart(event)" onclick="onSelectEmoji(${emoji.id});" src="${emoji.url}"></div>
         `
     })
     var elEmojis = document.querySelector('.emojis');
     elEmojis.innerHTML = strHTML;
 }
 
-function pickImage(emoji) {
-    console.log(emoji);
-}
+// function pickImage(emoji) {
+//     console.log(emoji);
+// }
 
 function onNextPage(){
     goNextPage();
@@ -273,4 +287,6 @@ function onAddClassActive(btn){
     }
 }
 
-
+function toggleMenu() {
+    document.querySelector('.mobile-menu').classList.toggle('displayed');
+}

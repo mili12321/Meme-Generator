@@ -11,18 +11,31 @@
     <header>
         <div class="header-container">
             <div class="logo">LOGO</div>
+
+            <div class="hamburger-button" onclick="toggleMenu()">
+                <i class="fa fa-bars"></i>
+            </div>
+
             <div class="nav-container">
                 <div class="nav-item gallery active" onclick="onAddClassActive(this);backToGallery();">Gallery</div>
                 <div class="nav-item about not-active" onclick="onAddClassActive(this)">About</div>
             </div>
         </div>
     </header>
+
+    <div class="mobile-menu slide-in-top">
+        <a class="mobile-nav-link not-active" onclick="onAddClassActive(this);backToGallery();">Gallery</a>
+        <a class="mobile-nav-link not-active" onclick="onAddClassActive(this)">About</a>
+    </div>
+
     <section class="main-web-page-container">
         <section class="main-container">
             <div class="options">
                 <div class="search-area"><span>Search</span><i class="fas fa-search"></i></div>
-                <div class="categorys"></div>
-                <div class="more-options">More</div>
+                <div class="kyewords-area">
+                    <div class="categorys"></div>
+                    <div class="more-options">More</div>
+                </div>
             </div>
 
             <div class="image-gallery">

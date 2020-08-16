@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas class="droppable" id="meme-canvas" ondragover="allowDrop(event)" ondrop="drop(event)"  width="476" height="500" style="border:7px solid #4e4e52a4; border-radius:30px;">
+        Canvas not supported!
+    </canvas>
+<img src="/emoji/blob_aww.png" alt="">
+    <script>
+        
+var gCanvas = document.getElementById('meme-canvas');
+var gCtx = gCanvas.getContext('2d');
+var	width = gCanvas.width
+var	height = gCanvas.height
+var	handle = {
+    x: width / 2,
+    y: height / 2,
+    radius: 20
+}
+var offset = {};
+var utils = {
+    distanceXY: function(x0, y0, x1, y1) {
+        var dx = x1 - x0,
+            dy = y1 - y0;
+        return Math.sqrt(dx * dx + dy * dy);
+    },
+    //Testing if a point is inside a object 
+    circlePointCollision: function(x, y, circle) {
+        return utils.distanceXY(x, y, circle.x, circle.y) < circle.radius;
+    }
+}
+draw();
+
+function draw() {
+    gCtx.clearRect(0, 0, width, height);//clear the canvas
+    //draw a cirale using handle's position and radius.
+    gCtx.fillStyle = "pink";
+    gCtx.beginPath();
+    gCtx.arc(handle.x, handle.y, handle.radius, 0, Math.PI * 2, false);
+    gCtx.fill();
+}
+
+changeMemeOnCanvas()
+//**************
+function changeMemeOnCanvas(){
+    var img = new Image();
+    img.src = '/emoji/blob_aww.png';
+    gCtx.drawImage(img, 0, 0);
+}
+
+//***********
+document.body.addEventListener("mousedown", function(event) {
+    /*
+    we will use utils.circlePointCollision fron the utils.js 
+    passing in the handle and the mouse x,y points.
+    if return true - then we know we are pressed the mouse button while
+    the mouse cursor was over the handle object.
+    ... so we can start dragging ...
+     */
+
+    if(utils.circlePointCollision(event.clientX, event.clientY, handle)) {
+        /*
+        to dragg we add event insteners to the mouse move and mouse up,
+        passing in functions named onMouseMove and onMouseUp.
+         */
+        document.body.addEventListener("mousemove", onMouseMove);
+        document.body.addEventListener("mouseup", onMouseUp);
+        
+        offset.x = event.clientX - handle.x;
+        offset.y = event.clientY - handle.y;
+    }
+});
+
+/*
+in the onMouseMove function, we will simply set the handle.x and handle.y
+to the event event.clientX and event.clientY.
+and then we will call draw();
+in this example, the only time we need to redraw the canvas is when we are
+dragging, so we can do it in the onMouseMove function.
+but if we had some other animation going on, we might need to use a 
+requestAnimationFrame loop
+ */
+function onMouseMove(event) {
+    handle.x = event.clientX - offset.x;
+    handle.y = event.clientY - offset.y;
+    draw();
+}
+//this is the drop and its end the dragging action.
+function onMouseUp(event) {
+    document.body.removeEventListener("mousemove", onMouseMove);
+    document.body.removeEventListener("mouseup", onMouseUp);
+}
+
+    </script>
+</body>
+</html>
